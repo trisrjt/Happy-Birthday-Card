@@ -7,6 +7,7 @@
   &--left {
     grid-column: balloon-l-start / balloon-l-end;
     animation: balloon-move 4s linear 0s infinite;
+
     @media (max-width: 800px) {
       margin-left: -25%;
     }
@@ -20,6 +21,7 @@
     grid-column: balloon-r-start / balloon-r-end;
     margin-left: -20%;
     animation: balloon-move 4s linear 0s infinite reverse;
+
     @media (max-width: 800px) {
       margin-left: 25%;
     }
@@ -40,6 +42,7 @@
 
   &--c-left {
     grid-column: flag-cl-start / flag-cl-end;
+
     @media (max-width: 800px) {
       display: none;
     }
@@ -47,6 +50,7 @@
 
   &--c-right {
     grid-column: flag-cr-start / flag-cr-end;
+
     @media (max-width: 800px) {
       display: none;
     }
@@ -147,6 +151,7 @@
   @media (max-width: 800px) {
     font-size: 4.2rem;
   }
+
   @media (max-width: 500px) {
     font-size: 3.8rem;
   }
@@ -235,6 +240,7 @@
 
 .flash {
   background-color: #fff;
+  display: none;
 }
 
 .giftroom,
@@ -289,6 +295,7 @@
   height: 12%;
   backface-visibility: hidden;
 }
+
 .velas:after,
 .velas:before {
   background: rgba(255, 0, 0, 0.4);
@@ -297,10 +304,12 @@
   width: 100%;
   height: 5%;
 }
+
 .velas:after {
   top: 25%;
   left: 0;
 }
+
 .velas:before {
   top: 45%;
   left: 0;
@@ -317,18 +326,23 @@
   width: 100%;
   height: 40%;
 }
+
 .fuego:nth-child(1) {
   animation: fuego 2s 6.5s infinite;
 }
+
 .fuego:nth-child(2) {
   animation: fuego 1.5s 6.5s infinite;
 }
+
 .fuego:nth-child(3) {
   animation: fuego 1s 6.5s infinite;
 }
+
 .fuego:nth-child(4) {
   animation: fuego 0.5s 6.5s infinite;
 }
+
 .fuego:nth-child(5) {
   animation: fuego 0.2s 6.5s infinite;
 }
@@ -336,12 +350,14 @@
 /* Animation Fire */
 
 @keyframes fuego {
+
   0%,
   100% {
     background: rgba(254, 248, 97, 0.5);
     box-shadow: 0 0 250% 62.5% rgba(248, 233, 209, 0.2);
     transform: scale(1);
   }
+
   50% {
     background: rgba(255, 50, 0, 0.1);
     box-shadow: 0 0 250% 125% rgba(248, 233, 209, 0.2);

@@ -1,11 +1,13 @@
-//jshint esversion:6
+//jshint esversion:8
+import { MazeGame } from "./maze.js";
 
 const button = document.querySelector(".btn"),
   darkroom = document.querySelector(".darkroom"),
   giftroom = document.querySelector(".giftroom"),
   hallway = document.querySelector(".hallway"),
   room = document.querySelector(".empty-room"),
-  flash = document.querySelector(".flash");
+  flash = document.querySelector(".flash"),
+  mazeGame = document.querySelector(".maze-game");
 
 // These are the text elements that hold messages to be displayed in the respective screes
 
@@ -118,60 +120,73 @@ export const animate = function () {
       }, 4000);
     } else if (button.classList.contains("gift")) {
       /* 
-              when the gift is pressed, the gift scene vanishes and the white div fades slowly giving a sense 
-              of explosion. After that, the message frame appears and moves up until the message completes. Then,
-              the message frame fades away and the card appears.
+              When the gift is pressed, show the maze game.
           */
-
-      haunt.pause();
-      blast.play();
       giftroom.style.display = "none";
-      transition(flash);
+      button.style.display = "none";
+      CTAtext.style.display = "none";
+      mazeGame.style.display = "flex";
 
-      music.loop = true;
-      music.play();
-
-      if (!process.env.SCROLL_MSG) {
-        frames[0].style.display = "flex";
-        setTimeout(() => {
-          frames[0].classList.add("appear");
-          frames[0].style.opacity = "1";
-        }, 1500);
-        return;
-      }
-
-      //This value is stored in the --readTime css variable of root element and is calculated dynamically at build time.
-      const readTime =
-        parseInt(
-          getComputedStyle(document.documentElement).getPropertyValue(
-            "--readTime"
-          )
-        ) + 5;
-
-      frames[1].style.display = "flex";
-
-      setTimeout(() => {
-        frames[1].classList.add("appear");
-        frames[1].style.opacity = "1";
-        msg.classList.add("move-up");
-      }, 1500);
-
-      setTimeout(() => {
-        msg.style.transform = "translateY(-100%)";
-        flash.style.display = "none";
-      }, 5000);
-
-      setTimeout(() => {
-        msgWindow.classList.add("fade-in");
-        msgWindow.style.opacity = "0";
-      }, readTime * 1000);
-
-      setTimeout(() => {
-        frames[1].style.display = "none";
-        frames[0].style.display = "flex";
-        frames[0].classList.add("appear");
-        frames[0].style.opacity = "1";
-      }, (readTime + 3) * 1000);
+      new MazeGame("maze-container", () => {
+        mazeGame.style.display = "none";
+        startSurprise();
+      });
     }
   });
+};
+
+const startSurprise = () => {
+  /* 
+          When the gift is pressed or maze is solved, the gift scene vanishes and the white div fades slowly giving a sense 
+          of explosion. After that, the message frame appears and moves up until the message completes. Then,
+          the message frame fades away and the card appears.
+      */
+
+  haunt.pause();
+  blast.play();
+  flash.style.display = "block"; // Show the flash effect only now
+  transition(flash);
+
+  music.loop = true;
+  music.play();
+
+  if (!process.env.SCROLL_MSG) {
+    frames[0].style.display = "flex";
+    setTimeout(() => {
+      frames[0].classList.add("appear");
+      frames[0].style.opacity = "1";
+    }, 1500);
+    return;
+  }
+
+  //This value is stored in the --readTime css variable of root element and is calculated dynamically at build time.
+  const readTime =
+    parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue("--readTime")
+    ) + 5;
+
+  frames[1].style.display = "flex";
+
+  setTimeout(() => {
+    frames[1].classList.add("appear");
+    frames[1].style.opacity = "1";
+    msg.classList.add("move-up");
+  }, 1500);
+
+  setTimeout(() => {
+    msg.style.transform = "translateY(-100%)";
+    flash.style.display = "none";
+  }, 5000);
+
+  setTimeout(() => {
+    msgWindow.classList.add("fade-in");
+    msgWindow.style.opacity = "0";
+  }, readTime * 1000);
+
+  setTimeout(() => {
+    frames[1].style.display = "none";
+    frames[0].style.display = "flex";
+    frames[0].classList.add("appear");
+    frames[0].style.opacity = "1";
+  }, (readTime + 3) * 1000);
 };
