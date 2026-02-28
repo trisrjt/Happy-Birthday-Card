@@ -1,8 +1,27 @@
 [build]
-  base = "./"
-  publish = "./dist/"
-  command = "npm run build"
+  base      = "./"
+  publish   = "dist"
+  command   = "npm run build:ci"
 
-[template.environment]
-  NAME = "enter Name of the receiver"
-  PIC = "enter web url of the receiver's image"
+# Redirect all routes to index.html (for PWA/SPA compatibility)
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
+
+# ─── Environment Variables ───────────────────────────────────────────────────
+# Set these in the Netlify dashboard under Site → Environment Variables
+#
+# REQUIRED:
+#   NAME        – Receiver's full name          e.g. "Ahana"
+#   PIC         – Public image URL OR filename  e.g. "https://i.imgur.com/xyz.jpg"
+#               – If a filename (e.g. "sample2.jpeg"), place the file in local/
+#               – For Netlify deploys, a public URL is strongly recommended
+#
+# OPTIONAL:
+#   NICKNAME    – Nickname shown on the card    e.g. "Raii"
+#   HBD_MSG     – Custom greeting text          e.g. "May your soul be blessed always"
+#   SCROLL_TEXT – Inline scroll message text    e.g. "Dear Ahana, Happy Birthday..."
+#   SCROLL_MSG  – Telegra.ph article URL        e.g. "https://telegra.ph/My-Letter-08-09"
+#               – Used only if SCROLL_TEXT is not set
+#   OPEN_DATE   – Date to unlock the card       e.g. "2026-02-25" (YYYY-MM-DD)

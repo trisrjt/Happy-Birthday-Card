@@ -150,7 +150,7 @@ const startSurprise = () => {
   music.loop = true;
   music.play();
 
-  if (!process.env.SCROLL_MSG) {
+  if (!process.env.SCROLL_MSG && !process.env.SCROLL_TEXT) {
     frames[0].style.display = "flex";
     setTimeout(() => {
       frames[0].classList.add("appear");

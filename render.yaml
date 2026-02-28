@@ -1,0 +1,26 @@
+services:
+  # Render Static Site — Happy Birthday Card
+  - type: web
+    name: happy-birthday-card
+    env: static
+    buildCommand: npm install --ignore-scripts && npm rebuild sharp && npm run build:ci
+    staticPublishPath: dist
+    pullRequestPreviewsEnabled: false
+
+    # ─── Environment Variables ─────────────────────────────────────────────
+    # Set these in the Render dashboard under the service → Environment tab.
+    #
+    # REQUIRED:
+    envVars:
+      - key: NAME
+        sync: false       # Set manually in dashboard — e.g. "Ahana"
+
+      - key: PIC
+        sync: false       # Public image URL or filename in local/ — e.g. "https://i.imgur.com/xyz.jpg"
+
+    # OPTIONAL (add manually in dashboard if needed):
+    #   NICKNAME    – Nickname shown on the card    e.g. "Raii"
+    #   HBD_MSG     – Custom greeting text
+    #   SCROLL_TEXT – Inline scroll message (recommended over SCROLL_MSG for Render)
+    #   SCROLL_MSG  – Telegra.ph article URL
+    #   OPEN_DATE   – Date to unlock the card       e.g. "2026-02-25"

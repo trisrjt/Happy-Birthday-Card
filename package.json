@@ -8,13 +8,18 @@
     "main": false
   },
   "browserslist": "last 10 versions, not dead",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "watch:parcel": "parcel src/index.html",
-    "build:parcel": "parcel build src/index.html",
+    "build:parcel": "parcel build src/index.html --no-cache",
     "init-index-local": "node builder/init.js --local",
     "init-index-remote": "node builder/init.js --remote",
+    "init-index-ci": "node builder/init.js --ci",
     "watch": "npm-run-all init-index-local watch:parcel",
-    "build": "npm-run-all init-index-remote build:parcel"
+    "build": "npm-run-all init-index-remote build:parcel",
+    "build:ci": "npm-run-all init-index-ci build:parcel"
   },
   "repository": {
     "type": "git",
