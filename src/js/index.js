@@ -7,11 +7,14 @@ import { animate } from "./animation.js";
 
 /******************************************************* SETUP ************************************************************/
 
-if (process.env.OPEN_DATE) {
+const urlParams = new URLSearchParams(window.location.search);
+const isDev = urlParams.get("dev") === "true";
+
+if (process.env.OPEN_DATE && !isDev) {
   const status = isBDay();
   if (status === "IS_EARLY") setPage(soon);
-  if (status === "IS_LATE") setPage(late);
-  if (status === "ON_TIME") animate();
+  else if (status === "IS_LATE") setPage(late);
+  else animate();
 } else {
   animate();
 }
