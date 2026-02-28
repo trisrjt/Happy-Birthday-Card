@@ -4,6 +4,9 @@ dist/
 .env
 *-safe.*
 temp/
-local/
+local/*
+!local/sample2.jpeg
+!local/sample-scroll.txt
+!local/readme.md
 src/index.html
 src/pic.jpeg
